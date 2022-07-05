@@ -1,12 +1,14 @@
-export function getItemsList() {
-    const elementsList = document.querySelectorAll('.technology');
-    console.dir(elementsList);
-    return elementsList;
+export function getTitle() {
+    const titleElem = document.querySelector('.title');
+    return titleElem.textContent;
 }
 
-export function getItemsArray() {
-    const NodeList = document.querySelectorAll('.tool');
-    const elementsArray = Array.from(NodeList);
-    console.dir(elementsArray);
-    return elementsArray;
+export function getDescription() {
+    const aboutElem = document.querySelector('.about');
+    return aboutElem.innerText;
+}
+
+export function getPlans() {
+    const plansElem = document.querySelector('.plans');
+    return plansElem.innerText;
 }
