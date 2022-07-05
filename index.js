@@ -10,5 +10,10 @@ export function getDescription() {
 
 export function getPlans() {
     const plansElem = document.querySelector('.plans');
-    return plansElem.innerText;
+    return plansElem.innerHTML;
+}
+
+export function getGoal() {
+    const goalElem = document.querySelector('.goal');
+    return goalElem.outerHTML;
 }
