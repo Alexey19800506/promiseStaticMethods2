@@ -1,4 +1,4 @@
-export function setButton(buttonText) {
-    const buttonElem = document.querySelector('body');
-    buttonElem.innerHTML = `<button> ${buttonText} </button>`;
+export function clearList() {
+    const clearElem = document.querySelector('.cotegories');
+    clearElem.innerHTML = '';
 }
