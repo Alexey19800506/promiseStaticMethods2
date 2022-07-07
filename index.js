@@ -26,6 +26,11 @@ spanElem.addEventListener('click', logGreenSpan);
 
 const btnAttachHand = document.querySelector('.attach-handlers-btn');
 const btnRemoteHand = document.querySelector('.remove-handlers-btn');
+const bntClear = document.querySelector('.clear-btn');
+bntClear.addEventListener('click', () => {
+    const eventsListElem = document.querySelector('.events-list');
+    eventsListElem.innerHTML = '';
+});
 btnRemoteHand.addEventListener('click', () => {
     divElem.removeEventListener('click', logGreyDiv, true);
     divElem.removeEventListener('click', logGreenDiv);
