@@ -1,6 +1,9 @@
-const inputElem = document.querySelector('.text-input');
+const inputElem = document.querySelector('.task-status');
 
 function change(event) {
-    console.log(event.target.value);
+    if (event.target.checked) {
+        console.log(true);
+    } else console.log(false);
+
 }
 inputElem.addEventListener('change', change);
