@@ -1,9 +1,9 @@
-const inputElem = document.querySelector('.task-status');
+const divElem = document.querySelector('.pagination');
 
-function change(event) {
-    if (event.target.checked) {
-        console.log(true);
-    } else console.log(false);
-
+function handleClick(event) {
+    if (event.target.closest('.pagination__page')) {
+        console.log(event.target.dataset.pageNumber);
+    }
 }
-inputElem.addEventListener('change', change);
+
+divElem.addEventListener('click', handleClick);
