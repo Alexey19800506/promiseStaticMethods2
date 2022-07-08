@@ -1,7 +1,7 @@
-const buttonElem = document.querySelectorAll('.pagination__page');
+const buttonElem = document.querySelectorAll('.btn');
 
 function handleClick(event) {
-    console.log(event.target.dataset.pageNumber);
+    console.log(event.target.textContent);
 }
 buttonElem.forEach(buttonItem => {
     buttonItem.addEventListener('click', handleClick);
