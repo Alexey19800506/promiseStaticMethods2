@@ -1,8 +1,7 @@
-const checkboxElem = document.querySelector('.task-status');
+const buttonElem = document.querySelector('.search__btn');
+const inputElem = document.querySelector('.search__input');
 
-function checked() {
-    if (checkboxElem.checked) {
-        console.log(false);
-    } else console.log(true);
+function click() {
+    console.log(inputElem.value);
 }
-checkboxElem.addEventListener('change', checked);
+buttonElem.addEventListener('click', click);
