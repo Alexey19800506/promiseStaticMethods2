@@ -1,7 +1,6 @@
-const buttonElem = document.querySelector('.single-use-btn');
+const buttonElem = document.querySelector('.btn');
 
-function clicked() {
-    console.log('clicked');
-    buttonElem.removeEventListener('click', clicked);
+function handleClick(event) {
+    console.log(event.target.textContent);
 }
-buttonElem.addEventListener('click', clicked);
+buttonElem.addEventListener('click', handleClick);
