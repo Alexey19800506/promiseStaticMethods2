@@ -1,9 +1,8 @@
-const divElem = document.querySelector('.pagination');
+const buttonElem = document.querySelectorAll('.pagination__page');
 
 function handleClick(event) {
-    if (event.target.closest('.pagination__page')) {
-        console.log(event.target.dataset.pageNumber);
-    }
+    console.log(event.target.dataset.pageNumber);
 }
-
-divElem.addEventListener('click', handleClick);
+buttonElem.forEach(buttonItem => {
+    buttonItem.addEventListener('click', handleClick);
+});
