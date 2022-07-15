@@ -1,40 +1,56 @@
-const emailInputElem = document.querySelector('#email');
-const passwordInputElem = document.querySelector('#password');
-
-const emailErrorElem = document.querySelector('.error-text_email');
-const passwordErrorElem = document.querySelector('.error-text_password');
-
-const isRequired = value => value ? undefined : 'Required';
-const isEmail = value => value.includes('@') ? undefined : 'Should be an email';
-
-const validatorByField = {
-    email: [isRequired, isEmail],
-    password: [isRequired]
-};
-const validate = (fieldName, value) => {
-    const validators = validatorByField[fieldName];
-    return validators.map(validator => validator(value)).filter(errorText => errorText).join(', ');
+const generateNumbersRange = (from, to) => {
+    const result = [];
+    for (let i = from; i <= to; i++) {
+        result.push(i);
+    }
+    return result;
 }
 
-const onEmailChange = event => {
-    const errorText = validate('email', event.target.value);
-    emailErrorElem.textContent = errorText;
-}
+const getLineSeats = () => generateNumbersRange(1, 10)
+    .map(seatNumber => `
+        <div class="sector__seat" data-seat-number="${seatNumber}"
+        ></div> 
+    `).join('');
 
-const onPasswordChange = event => {
-    const errorText = validate('password', event.target.value);
-    passwordErrorElem.textContent = errorText;
-}
+const getSectorLines = () => {
+    const seatsString = getLineSeats();
 
-emailInputElem.addEventListener('input', onEmailChange);
-passwordInputElem.addEventListener('input', onPasswordChange);
-
-const formElem = document.querySelector('.login-form');
-
-const onFormSubmit = event => {
-    event.preventDefault();
-    const formData = [...new FormData(formElem)].reduce((acc, [field, value]) => ({...acc, [field]: value }), {});
-    alert(JSON.stringify(formData));
+    return generateNumbersRange(1, 10)
+        .map(lineNumber => `
+            <div class="sector__line" data-line-number="${lineNumber}"
+            >${seatsString}</div> 
+        `).join('');
 };
 
-formElem.addEventListener('submit', onFormSubmit);
+const arenaElem = document.querySelector('.arena');
+
+const renderArena = () => {
+    const linesString = getSectorLines();
+
+    const sectorsString = generateNumbersRange(1, 3)
+        .map(sectorNumber => `
+            <div class="sector" data-sector-number="${sectorNumber}"
+            >${linesString}</div> 
+        `).join('');
+
+    arenaElem.innerHTML = sectorsString;
+}
+
+const onSeatSelect = event => {
+    const isSeat = event.target.classList.contains('sector__seat');
+
+    if (!isSeat) {
+        return;
+    }
+
+    const seatNumber = event.target.dataset.seatNumber;
+    const lineNumber = event.target.closest('.sector__line').dataset.lineNumber;
+    const sectorNumber = event.target.closest('.sector').dataset.sectorNumber;
+
+    const selectedSeatElem = document.querySelector('.board__selected-seat');
+
+    selectedSeatElem.textContent = `S ${sectorNumber} - L ${lineNumber} - S ${seatNumber}`;
+};
+
+arenaElem.addEventListener('click', onSeatSelect);
+renderArena();
