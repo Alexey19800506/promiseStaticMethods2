@@ -1,56 +1,53 @@
-const generateNumbersRange = (from, to) => {
-    const result = [];
-    for (let i = from; i <= to; i++) {
-        result.push(i);
-    }
-    return result;
-}
+const tasks = [
+    { text: 'Buy milk', done: false },
+    { text: 'Pick up Tom from airport', done: false },
+    { text: 'Visit party', done: false },
+    { text: 'Visit doctor', done: true },
+    { text: 'Buy meat', done: true },
+];
 
-const getLineSeats = () => generateNumbersRange(1, 10)
-    .map(seatNumber => `
-        <div class="sector__seat" data-seat-number="${seatNumber}"
-        ></div> 
-    `).join('');
+const listElem = document.querySelector('.list');
 
-const getSectorLines = () => {
-    const seatsString = getLineSeats();
+const renderTasks = tasksList => {
+    let i = 0;
 
-    return generateNumbersRange(1, 10)
-        .map(lineNumber => `
-            <div class="sector__line" data-line-number="${lineNumber}"
-            >${seatsString}</div> 
-        `).join('');
+    const tasksElems = tasksList
+        .sort((a, b) => a.done - b.done)
+        .map(({ text, done }) => {
+            const listItemElem = document.createElement('li');
+            listItemElem.classList.add('list__item');
+            const checkbox = document.createElement('input');
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.dataset.id = i + 1;
+            checkbox.checked = done;
+            checkbox.classList.add('list__item-checkbox');
+            if (done) {
+                listItemElem.classList.add('list__item_done');
+            }
+            listItemElem.append(checkbox, text);
+
+            return listItemElem;
+        });
+
+    listElem.append(...tasksElems);
 };
 
-const arenaElem = document.querySelector('.arena');
+renderTasks(tasks);
 
-const renderArena = () => {
-    const linesString = getSectorLines();
-
-    const sectorsString = generateNumbersRange(1, 3)
-        .map(sectorNumber => `
-            <div class="sector" data-sector-number="${sectorNumber}"
-            >${linesString}</div> 
-        `).join('');
-
-    arenaElem.innerHTML = sectorsString;
+const createTask = () => {
+    if (!inputTask.value == '') {
+        tasks.unshift({ text: inputTask.value, done: false });
+        renderTasks(tasks);
+        inputTask.value = '';
+    }
 }
 
-const onSeatSelect = event => {
-    const isSeat = event.target.classList.contains('sector__seat');
+buttonSubmit.addEventListener('click', createTask);
 
-    if (!isSeat) {
-        return;
-    }
+const statusCheckbox = document.querySelector('.list__item-checkbox');
+const checked = event => {
+    tasks[+event.target.dataset.id].done = true;
+    renderTasks(tasks);
+}
 
-    const seatNumber = event.target.dataset.seatNumber;
-    const lineNumber = event.target.closest('.sector__line').dataset.lineNumber;
-    const sectorNumber = event.target.closest('.sector').dataset.sectorNumber;
-
-    const selectedSeatElem = document.querySelector('.board__selected-seat');
-
-    selectedSeatElem.textContent = `S ${sectorNumber} - L ${lineNumber} - S ${seatNumber}`;
-};
-
-arenaElem.addEventListener('click', onSeatSelect);
-renderArena();
+statusCheckbox.addEventListener('click', checked);
