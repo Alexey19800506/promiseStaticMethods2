@@ -18,7 +18,7 @@ const renderTasks = tasksList => {
             listItemElem.classList.add('list__item');
             const checkbox = document.createElement('input');
             checkbox.setAttribute('type', 'checkbox');
-            checkbox.dataset.id = i + 1;
+            checkbox.dataset.id = i++;
             checkbox.checked = done;
             checkbox.classList.add('list__item-checkbox');
             if (done) {
@@ -35,6 +35,7 @@ const renderTasks = tasksList => {
 renderTasks(tasks);
 const buttonSubmit = document.querySelector('.create-task-btn');
 const inputTask = document.querySelector('.task-input');
+
 const createTask = () => {
     if (!inputTask.value == '') {
         tasks.unshift({ text: inputTask.value, done: false });
@@ -44,11 +45,15 @@ const createTask = () => {
 }
 
 buttonSubmit.addEventListener('click', createTask);
-
 const statusCheckbox = document.querySelector('.list__item-checkbox');
+const statusCheckboxAll = document.querySelectorAll('.list__item-checkbox');
+
 const checked = event => {
-    tasks[+event.target.dataset.id].done = true;
+    if (event.target.checked) {
+        tasks[event.target.dataset.id].done = true;
+    } else {
+        tasks[event.target.dataset.id].done = false;
+    }
     renderTasks(tasks);
 }
-
-statusCheckbox.addEventListener('click', checked);
+statusCheckboxAll.forEach(statusCheckboxAll => statusCheckboxAll.addEventListener('click', checked));;
