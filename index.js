@@ -33,7 +33,8 @@ const renderTasks = tasksList => {
 };
 
 renderTasks(tasks);
-
+const buttonSubmit = document.querySelector('.create-task-btn');
+const inputTask = document.querySelector('.task-input');
 const createTask = () => {
     if (!inputTask.value == '') {
         tasks.unshift({ text: inputTask.value, done: false });
