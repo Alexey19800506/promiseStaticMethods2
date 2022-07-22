@@ -5,20 +5,22 @@ const tasks = [
     { text: 'Visit doctor', done: true },
     { text: 'Buy meat', done: true },
 ];
-
+for (let i = 0; i < tasks.length; i++) {
+    tasks[i].id = Math.floor(Math.random() * 1000);
+}
+console.log(tasks);
 const listElem = document.querySelector('.list');
 
 const renderTasks = tasksList => {
-    let i = 0;
 
     const tasksElems = tasksList
         .sort((a, b) => a.done - b.done)
-        .map(({ text, done }) => {
+        .map(({ text, done, id }) => {
             const listItemElem = document.createElement('li');
             listItemElem.classList.add('list__item');
             const checkbox = document.createElement('input');
             checkbox.setAttribute('type', 'checkbox');
-            checkbox.dataset.id = i++;
+            checkbox.dataset.id = id;
             checkbox.checked = done;
             checkbox.classList.add('list__item-checkbox');
             if (done) {
@@ -37,23 +39,28 @@ const buttonSubmit = document.querySelector('.create-task-btn');
 const inputTask = document.querySelector('.task-input');
 
 const createTask = () => {
+
     if (!inputTask.value == '') {
-        tasks.unshift({ text: inputTask.value, done: false });
+        listElem.innerHTML = '';
+        tasks.unshift({ text: inputTask.value, done: false, id: Math.floor(Math.random() * 1000) });
         renderTasks(tasks);
+        console.log(tasks);
         inputTask.value = '';
     }
 }
 
 buttonSubmit.addEventListener('click', createTask);
 const statusCheckbox = document.querySelector('.list__item-checkbox');
-const statusCheckboxAll = document.querySelectorAll('.list__item-checkbox');
 
 const checked = event => {
-    if (event.target.checked) {
-        tasks[event.target.dataset.id].done = true;
+    listElem.innerHTML = '';
+
+    if (event.target.done = false && event.target.dadaset.id) {
+        event.target.done = true;
     } else {
-        tasks[event.target.dataset.id].done = false;
+        event.target.done = false;
     }
+
     renderTasks(tasks);
 }
-statusCheckboxAll.forEach(statusCheckboxAll => statusCheckboxAll.addEventListener('click', checked));;
+statusCheckbox.addEventListener('click', checked);
