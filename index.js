@@ -8,7 +8,7 @@ const tasks = [
 for (let i = 0; i < tasks.length; i++) {
     tasks[i].id = Math.floor(Math.random() * 1000);
 }
-console.log(tasks);
+
 const listElem = document.querySelector('.list');
 
 const renderTasks = tasksList => {
@@ -39,28 +39,27 @@ const buttonSubmit = document.querySelector('.create-task-btn');
 const inputTask = document.querySelector('.task-input');
 
 const createTask = () => {
-
     if (!inputTask.value == '') {
         listElem.innerHTML = '';
         tasks.unshift({ text: inputTask.value, done: false, id: Math.floor(Math.random() * 1000) });
         renderTasks(tasks);
-        console.log(tasks);
+
         inputTask.value = '';
     }
 }
 
 buttonSubmit.addEventListener('click', createTask);
-const statusCheckbox = document.querySelector('.list__item-checkbox');
+const statusCheckbox = document.querySelectorAll('.list__item-checkbox');
 
 const checked = event => {
     listElem.innerHTML = '';
 
-    if (event.target.done = false && event.target.dadaset.id) {
-        event.target.done = true;
-    } else {
-        event.target.done = false;
+    for (let i = 0; i < tasks.length; i++) {
+        if (Number(event.target.dataset.id) == tasks[i].id) {
+            tasks[i].done = true;
+        }
     }
-
     renderTasks(tasks);
 }
-statusCheckbox.addEventListener('click', checked);
+
+statusCheckbox.forEach(statusCheckbox => statusCheckbox.addEventListener('click', checked));
