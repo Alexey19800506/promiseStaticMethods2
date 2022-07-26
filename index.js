@@ -50,18 +50,18 @@ const createTask = () => {
 }
 
 buttonSubmit.addEventListener('click', createTask);
-const statusCheckbox = document.querySelectorAll('.list__item-checkbox');
 
-const checked = event => {
+const onToggleTask = event => {
+
+    const isCheckbox = event.target.classList.contains('list__item-checkbox');
+
+    if (!isCheckbox) {
+        return;
+    }
     listElem.innerHTML = '';
-    tasks.map(elem => {
-        if (Number(event.target.dataset.id) == elem.id) {
-            if (elem.done = false) elem.done = true;
-            else elem.done = false;
-        }
-    });
+    const taskData = tasks.find(task => task.id === +(event.target.dataset.id));
+    Object.assign(taskData, { done: event.target.checked });
     renderTasks(tasks);
-
 }
 
-statusCheckbox.forEach(statusCheckbox => statusCheckbox.addEventListener('click', checked));
+listElem.addEventListener('click', onToggleTask);
