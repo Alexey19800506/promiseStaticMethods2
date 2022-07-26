@@ -1,8 +1,11 @@
-const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'St'];
-export function dayOfWeek(date, days) {
-    const day = new Date(date).getDate();
+const formatter = new Intl.DateTimeFormat('en', {
+    timeZone: 'UTC',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+});
 
-    const dateInFuture = new Date(date).setDate(day + days);
-
-    return weekDays[new Date(dateInFuture).getDay()];
+export function getGreenwichTime(date) {
+    return formatter.format(date);
 }
+console.log(getGreenwichTime(new Date()));
