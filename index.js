@@ -11,6 +11,3 @@ export function getDiff(startDate, endDate) {
 
     return `${days}d ${hours}h ${minuts}m ${seconds}s`;
 }
-
-
-console.log(getDiff(new Date(2021, 2, 1, 15, 32, 33), new Date(2021, 1, 1, 14, 31, 32)));
