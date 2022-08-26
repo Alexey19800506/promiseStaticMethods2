@@ -1,0 +1,109 @@
+.page {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: scroll;
+}
+
+.button {
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 25px;
+}
+
+.icon-button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__content {
+  background: #fff;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(204, 204, 204, 0.2705882353);
+  z-index: 10;
+}
+
+.popup__content {
+  position: absolute;
+  background: #fff;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+.header {
+  display: flex;
+  height: 50px;
+  padding: 5px;
+  position: fixed;
+}
+
+.calendar {
+  margin-top: 50px;
+}
+.calendar__header {
+  display: flex;
+  height: 100px;
+  border-top: 1px solid rgba(128, 128, 128, 0.3);
+  position: fixed;
+}
+.calendar__day-label {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-slot {
+  width: 48px;
+  height: 60px;
+  position: relative;
+}
+.time-slot__time {
+  position: absolute;
+  left: 12px;
+  bottom: 0px;
+  margin: 0 auto;
+  font-size: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+}
+
+/*# sourceMappingURL=styles.css.map */
