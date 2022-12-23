@@ -1,12 +1,11 @@
 .button {
     height: 40px;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid $border-color-grey;
     outline: none;
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
-    margin-left: 25px;
 }
 
 .icon-button {
@@ -21,10 +20,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 4;
+    &__update {
+        display: flex;
+        justify-content: center;
+        z-index: 2;
+    }
     &__content {
-        background: #fff;
+        background: $background-white;
         padding: 16px;
-        border: 1px solid #ccc;
+        border: 1px solid $border-dark-grey;
         border-radius: 8px;
     }
 }
@@ -35,17 +40,18 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #cccccc45;
+    background-color: $background-light-grey;
     z-index: 10;
 }
 
 .popup {
     &__content {
         position: absolute;
-        background: #fff;
+        background: $background-white;
         padding: 16px;
-        border: 1px solid #ccc;
+        border: 1px solid $border-color-grey;
         border-radius: 8px;
+        z-index: 3;
     }
 }
 

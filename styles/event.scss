@@ -1,1 +1,28 @@
 // стили отображаемого в календаре события
+.event {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    min-height: 60px;
+    background-color: $background-grey-blue;
+    border-radius: 5px;
+    color: $color-white;
+    text-align: center;
+    z-index: 2;
+    left: 25%;
+    &__title {
+        margin-bottom: 3px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    &__time {
+        margin-bottom: 3px;
+        font-size: 12px;
+    }
+    &__description {
+        font-size: 10px;
+        font-weight: 200;
+    }
+}

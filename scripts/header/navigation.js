@@ -9,15 +9,33 @@ const displayedMonthElem = document.querySelector(
 );
 
 function renderCurrentMonth() {
-    // отрисовать месяц, к которому относиться текущая неделя (getDisplayedMonth)
-    // вставить в .navigation__displayed-month
-
-
+    const date = getStartOfWeek(getItem('displayedWeekStart'));
+    displayedMonthElem.innerHTML = getDisplayedMonth(date);
 }
 
 const onChangeWeek = (event) => {
-    // при переключении недели обновите displayedWeekStart в storage
-    // и перерисуйте все необходимые элементы страницы (renderHeader, renderWeek, renderCurrentMonth)
+    const switchWeek = event.target.closest('button');
+
+    if (switchWeek === null) {
+        return;
+    }
+
+    const mondayCurrentWeek = getStartOfWeek(getItem('displayedWeekStart'));
+    const day = new Date(mondayCurrentWeek).getDate();
+    const week = 7;
+
+    const changeMonth =
+        switchWeek.dataset.direction === 'next' ?
+        new Date(mondayCurrentWeek).setDate(day + week) :
+        switchWeek.dataset.direction === 'prev' ?
+        new Date(mondayCurrentWeek).setDate(day - week) :
+        getStartOfWeek(new Date());
+
+    setItem('displayedWeekStart', new Date(changeMonth));
+
+    renderHeader();
+    renderCurrentMonth();
+    renderWeek();
 };
 
 export const initNavigation = () => {
