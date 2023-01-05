@@ -1,12 +1,5 @@
 import { getItem } from './storage.js';
 
-const compareTasks = () => {
-    const tasksList = getItem('tasksList');
-    tasksList.sort((a, b) => +(Date.now(a.createDate)) - +(Date.now(b.createDate)));
-
-    return tasksList;
-}
-
 const createCheckbox = ({ done, id }) => {
     const checkboxElem = document.createElement('input');
     checkboxElem.setAttribute('type', 'checkbox');
@@ -31,11 +24,10 @@ const createListItem = ({ text, done, id }) => {
 
 export const renderTasks = () => {
     const tasksList = getItem('tasksList') || [];
-    console.log(Date.now(getItem('tasksList')[0].createDate));
     const listElem = document.querySelector('.list');
     listElem.innerHTML = '';
     const tasksElems = tasksList
-        .sort(compareTasks)
+        .sort((a, b) => a.done - b.done)
         .map(createListItem);
     listElem.append(...tasksElems);
 };

@@ -8,9 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const onStorageChange = e => {
-    if (e.key === 'tasksList') {
-        renderTasks();
+    if (e.key !== 'tasksList') {
+        return;
     }
+    renderTasks();
 };
 
 window.addEventListener('storage', onStorageChange);
