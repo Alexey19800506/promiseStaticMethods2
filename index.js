@@ -1,6 +1,7 @@
 export const shmoment = (date) => {
-    let newDate = date;
+    let newDate = new Date(date);
     let result = newDate;
+
     const moment = {
         add(name, value) {
             if (name === 'years') {
@@ -12,7 +13,7 @@ export const shmoment = (date) => {
             } else if (name === 'hours') {
                 result = new Date(newDate.setHours(newDate.getHours() + value));
                 return this;
-            } else if (name === 'dates') {
+            } else if (name === 'days') {
                 result = new Date(newDate.setDate(newDate.getDate() + value));
                 return this;
             } else if (name === 'minutes') {
@@ -36,7 +37,7 @@ export const shmoment = (date) => {
             } else if (name === 'hours') {
                 result = new Date(newDate.setHours(newDate.getHours() - value));
                 return this;
-            } else if (name === 'dates') {
+            } else if (name === 'days') {
                 result = new Date(newDate.setDate(newDate.getDate() - value));
                 return this;
             } else if (name === 'minutes') {
@@ -57,4 +58,4 @@ export const shmoment = (date) => {
     return moment;
 }
 
-console.log(shmoment(new Date(2020, 0, 7, 17, 17, 17, 5)).result());
+console.log(shmoment(new Date(2020, 0, 7, 17, 17, 17, 5)).add('minutes', 7).result());
