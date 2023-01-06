@@ -1,52 +1,52 @@
 const shmoment = (date) => {
-    let result;
-
+    let newDate = date;
+    let result = newDate;
     const moment = {
         add(name, value) {
             if (name === 'years') {
-                result = new Date(date.setFullYear(date.getFullYear() + value));
+                result = new Date(newDate.setFullYear(newDate.getFullYear() + value));
                 return this;
             } else if (name === 'months') {
-                result = new Date(date.setMonth(date.getMonth() + value));
+                result = new Date(newDate.setMonth(newDate.getMonth() + value));
                 return this;
             } else if (name === 'hours') {
-                result = new Date(date.setHours(date.getHours() + value));
+                result = new Date(newDate.setHours(newDate.getHours() + value));
                 return this;
             } else if (name === 'dates') {
-                result = new Date(date.setDate(date.getDate() + value));
+                result = new Date(newDate.setDate(newDate.getDate() + value));
                 return this;
             } else if (name === 'minutes') {
-                result = new Date(date.setMinutes(date.getMinutes() + value));
+                result = new Date(newDate.setMinutes(newDate.getMinutes() + value));
                 return this;
             } else if (name === 'seconds') {
-                result = new Date(date.setSeconds(date.getSeconds() + value));
+                result = new Date(newDate.setSeconds(newDate.getSeconds() + value));
                 return this;
             } else if (name === 'milliseconds') {
-                result = new Date(date.setMilliseconds(date.getMilliseconds() + value));
+                result = new Date(newDate.setMilliseconds(newDate.getMilliseconds() + value));
                 return this;
             }
         },
         subtract(name, value) {
             if (name === 'years') {
-                result = new Date(date.setFullYear(date.getFullYear() - value));
+                result = new Date(newDate.setFullYear(newDate.getFullYear() - value));
                 return this;
             } else if (name === 'months') {
-                result = new Date(date.setMonth(date.getMonth() - value));
+                result = new Date(newDate.setMonth(newDate.getMonth() - value));
                 return this;
             } else if (name === 'hours') {
-                result = new Date(date.setHours(date.getHours() - value));
+                result = new Date(newDate.setHours(newDate.getHours() - value));
                 return this;
             } else if (name === 'dates') {
-                result = new Date(date.setDate(date.getDate() - value));
+                result = new Date(newDate.setDate(newDate.getDate() - value));
                 return this;
             } else if (name === 'minutes') {
                 result = new Date(date.setMinutes(date.getMinutes() - value));
                 return this;
             } else if (name === 'seconds') {
-                result = new Date(date.setSeconds(date.getSeconds() - value));
+                result = new Date(newDate.setSeconds(newDate.getSeconds() - value));
                 return this;
             } else if (name === 'milliseconds') {
-                result = new Date(date.setMilliseconds(date.getMilliseconds() - value));
+                result = new Date(newDate.setMilliseconds(newDate.getMilliseconds() - value));
                 return this;
             }
         },
@@ -57,4 +57,4 @@ const shmoment = (date) => {
     return moment;
 }
 
-console.log(shmoment(new Date(2020, 0, 7, 17, 17, 17, 5)).add('years', 1).add('seconds', 65).add('milliseconds', 65).result());
+console.log(shmoment(new Date(2020, 0, 7, 17, 17, 17, 5)).result());
