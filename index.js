@@ -1,61 +1,30 @@
-export const shmoment = (date) => {
-    let newDate = new Date(date);
-    let result = newDate;
+export const addImage = (imgSrc, callback) => {
+    const imgElem = document.createElement('img');
+    imgElem.setAttribute('alt', 'My Photo');
+    imgElem.src = imgSrc;
+    const containerElem = document.querySelector('.page');
+    containerElem.append(imgElem);
 
-    const moment = {
-        add(name, value) {
-            if (name === 'years') {
-                result = new Date(newDate.setFullYear(newDate.getFullYear() + value));
-                return this;
-            } else if (name === 'months') {
-                result = new Date(newDate.setMonth(newDate.getMonth() + value));
-                return this;
-            } else if (name === 'hours') {
-                result = new Date(newDate.setHours(newDate.getHours() + value));
-                return this;
-            } else if (name === 'days') {
-                result = new Date(newDate.setDate(newDate.getDate() + value));
-                return this;
-            } else if (name === 'minutes') {
-                result = new Date(newDate.setMinutes(newDate.getMinutes() + value));
-                return this;
-            } else if (name === 'seconds') {
-                result = new Date(newDate.setSeconds(newDate.getSeconds() + value));
-                return this;
-            } else if (name === 'milliseconds') {
-                result = new Date(newDate.setMilliseconds(newDate.getMilliseconds() + value));
-                return this;
-            }
-        },
-        subtract(name, value) {
-            if (name === 'years') {
-                result = new Date(newDate.setFullYear(newDate.getFullYear() - value));
-                return this;
-            } else if (name === 'months') {
-                result = new Date(newDate.setMonth(newDate.getMonth() - value));
-                return this;
-            } else if (name === 'hours') {
-                result = new Date(newDate.setHours(newDate.getHours() - value));
-                return this;
-            } else if (name === 'days') {
-                result = new Date(newDate.setDate(newDate.getDate() - value));
-                return this;
-            } else if (name === 'minutes') {
-                result = new Date(date.setMinutes(date.getMinutes() - value));
-                return this;
-            } else if (name === 'seconds') {
-                result = new Date(newDate.setSeconds(newDate.getSeconds() - value));
-                return this;
-            } else if (name === 'milliseconds') {
-                result = new Date(newDate.setMilliseconds(newDate.getMilliseconds() - value));
-                return this;
-            }
-        },
-        result() {
-            return result;
-        }
+    const onImageLoaded = () => {
+        const { width, height } = imgElem;
+        callback(null, { width, height });
     }
-    return moment;
+
+    imgElem.addEventListener('load', onImageLoaded);
+
+    imgElem.addEventListener('error', () => callback('Image load is failed'));
+};
+
+const imgSrc = 'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
+
+const onImageLoaded = (error, data) => {
+    if (error) {
+        console.log(error);
+        return;
+    }
+    const { width, height } = data;
+    const sizeElem = document.querySelector('.image-size');
+    sizeElem.textContent = `${width} x ${height}`;
 }
 
-console.log(shmoment(new Date(2020, 0, 7, 17, 17, 17, 5)).add('minutes', 7).result());
+addImage(imgSrc, onImageLoaded);
