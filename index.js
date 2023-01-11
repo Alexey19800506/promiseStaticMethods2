@@ -1,23 +1,21 @@
-const requestUserData = userId => {
-    const request = new Promise((resolve, reject) => {
-        if (userId === 'broken') {
-            setTimeout(() => {
-                reject(new Error('User not found'));
-            }, 500);
-        } else {
-            setTimeout(() => {
-                resolve({
-                    name: 'John',
-                    age: 17,
-                    email: `${userId}@exsemple.com`,
-                    userId
-                });
-            }, 1000);
-        }
+export const asyncCalculator = numbr => new Promise((resolve) => {
+        setTimeout(() => {
+            console.log(`Initial value: ${numbr}`);
+            resolve(numbr);
+        }, 500);
+    })
+    .then(value => new Promise((resolve) => {
+        setTimeout(() => {
+            const result = value * value;
+            console.log(`Squared value: ${result}`);
+            resolve(result);
+        }, 500);
+    }))
+    .then(value => {
+        const result = value * 2;
+        console.log(`Doubled value: ${result}`);
+        return result;
     });
-    return request;
-};
 
-requestUserData('broken')
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
+asyncCalculator(5)
+    .then(value => console.log(value));
