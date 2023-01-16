@@ -1,12 +1,32 @@
-const getSum = numbers => numbers
-    .filter(value => !isNaN(value))
-    .reduce((acc, num) => acc + Number(num), 0);
+const getRandomNumber = (from, to) => {
+    from + Math.random() * (to - from);
+}
+const request = url => new Promise(resolve => {
+    const randomDelay = getRandomNumber(1000, 3000);
+    setTimeout(() => {
+        resolve({
+            userData: {
+                name: 'Tom',
+                age: 17,
+            },
+            source: url
+        });
+    }, randomDelay);
+});
 
-export const asyncSum = (...asyncNumbers) => {
-    return Promise.all(asyncNumbers)
-        .then(num => getSum(num))
-        .catch(() => Promise.reject(new Error(`Can't calculate\\`)));
+const servers = [
+    'http://server.com/us',
+    'http://server.com/eu',
+    'http://server.com/au',
+];
+
+export const getUserASAP = userId => {
+    const userUrls = servers
+        .map(serverUrl => `${serverUrl}/${userId}`);
+
+    const requests = userUrls.map(userUrl => request(userUrl));
+
+    return Promise.race(requests);
 };
 
-//asyncSum(as1, Promise.reject(new Error('error')), as3)
-//.then(result => console.log(result));
+getUserASAP('user-id-1').then(result => console.log(result));
