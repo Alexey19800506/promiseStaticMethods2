@@ -15,9 +15,9 @@ const request = url => new Promise(resolve => {
 });
 
 const servers = [
-    'http://server.com/us',
-    'http://server.com/eu',
-    'http://server.com/au',
+    'https://server.com/us',
+    'https://server.com/eu',
+    'https://server.com/au',
 ];
 
 export const getUserASAP = userId => {
