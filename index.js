@@ -1,21 +1,12 @@
-export const asyncCalculator = numbr => new Promise((resolve) => {
-        setTimeout(() => {
-            console.log(`Initial value: ${numbr}`);
-            resolve(numbr);
-        }, 500);
-    })
-    .then(value => new Promise((resolve) => {
-        setTimeout(() => {
-            const result = value * value;
-            console.log(`Squared value: ${result}`);
-            resolve(result);
-        }, 500);
-    }))
-    .then(value => {
-        const result = value * 2;
-        console.log(`Doubled value: ${result}`);
-        return result;
-    });
+const getSum = numbers => numbers
+    .filter(value => !isNaN(value))
+    .reduce((acc, num) => acc + Number(num), 0);
 
-asyncCalculator(5)
-    .then(value => console.log(value));
+export const asyncSum = (...asyncNumbers) => {
+    return Promise.all(asyncNumbers)
+        .then(num => getSum(num))
+        .catch(() => Promise.reject(new Error(`Can't calculate\\`)));
+};
+
+//asyncSum(as1, Promise.reject(new Error('error')), as3)
+//.then(result => console.log(result));
